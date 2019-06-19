@@ -1,0 +1,36 @@
+.title {
+  margin-left: 1%;
+}
+.example-btn {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.title a{
+    text-decoration: none;
+    color: white;
+}
+.search{
+    width: 200px;
+    height: 25px;
+    margin-right: 2%;
+    border-radius: 15px;
+}
+.menu{
+    margin-left: 3%;
+}
+.menu a{
+    list-style-type: none;
+    display: initial;
+    padding: 15px;   
+    text-decoration: none;
+    color: white;
+}
+
+.menu a:hover{
+  background: rgb(81, 98, 192);
+  border-radius: 6px;
+}
+
