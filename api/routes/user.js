@@ -47,4 +47,44 @@ router.post("/signup", (req, res, next) => {
     });
 });
 
+// Login
+router.post("/login", (req, res, next) => {
+  User.find({ email: req.body.email })
+    .exec()
+    .then(user => {
+      if (user.length < 1) {
+        return res.status(404).json({
+          loginErrMessage: "Main Not Found"
+        });
+      }
+      bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+        if (err) {
+          return res.status(401).json({
+            message: "auth filed"
+          });
+        }
+        if (result) {
+          const token = jwt.sign(
+            {
+              email: user[0].email,
+              userId: user[0]._id
+            },
+            process.env.JWT_KEY,
+            {
+              expiresIn: "1h"
+            }
+          );
+          return res.status(200).json({
+            message: "auth successful",
+            then: token
+          });
+        } else {
+          res.status(401).json({
+            message: "auth failed"
+          });
+        }
+      });
+    });
+});
+
 module.exports = router;
